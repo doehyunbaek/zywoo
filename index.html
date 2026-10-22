@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZywOo · Match history</title>
+<link rel="icon" href="./src/assets/favicon.ico">
+<style>
+:root{color-scheme:dark;--bg:#101216;--panel:#191d24;--line:#303640;--muted:#a9b0bc;--gold:#ffe065}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#edf0f5;font:15px/1.5 system-ui,sans-serif}main{max-width:1400px;margin:auto;padding:36px 24px}h1{font-size:36px;margin:0}h1 span{color:var(--gold)}a{color:var(--gold)}.muted,small{color:var(--muted)}header{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}.controls,.tabs,.cards{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;flex:1;min-width:140px}.card strong{display:block;font-size:26px}.card span{color:var(--muted);font-size:13px}button,input,select{font:inherit;color:inherit;background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:10px 14px}button{cursor:pointer}button:hover,button[aria-pressed=true]{border-color:var(--gold);color:var(--gold)}button:disabled{opacity:.4;cursor:default}input[type=search]{flex:1;min-width:200px}label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;white-space:nowrap;text-align:left}th{background:var(--panel);color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}td,th{padding:13px 16px;border-bottom:1px solid var(--line)}tbody tr:hover{background:#1c2129}.positive{color:#84dcb0}.negative{color:#ff9494}.pager{display:flex;justify-content:space-between;align-items:center;margin:18px 0;gap:12px}.notice{background:var(--panel);border-left:3px solid var(--gold);padding:12px 16px;margin:16px 0}.hidden{display:none}details{white-space:normal;max-width:700px}summary{cursor:pointer;color:var(--gold)}.detail-map{padding:8px 0;border-bottom:1px solid var(--line)}footer{margin-top:36px;font-size:13px;color:var(--muted)}:focus-visible{outline:2px solid var(--gold);outline-offset:3px}@media(max-width:600px){main{padding:24px 12px}h1{font-size:28px}td,th{padding:10px}.card{padding:12px}.controls label{flex:1}}
+:root[data-theme=light]{color-scheme:light;--bg:#f5f6f8;--panel:#fff;--line:#d5dae2;--muted:#596273;--gold:#806000}html[data-theme=light] body{color:#18202c}html[data-theme=light] tbody tr:hover{background:#edf0f5}html[data-theme=light] .positive{color:#167348}html[data-theme=light] .negative{color:#b52b39}
+.tournament-expand{border:0;background:transparent;padding:0;text-align:left}.tournament-expand::before{content:'▸';display:inline-block;margin-right:8px}.tournament-expand[aria-expanded=true]::before{content:'▾'}.mvp-badge{display:inline-block;color:var(--gold);border:1px solid currentColor;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:700;text-decoration:none}.major-event{display:inline-block;border-left:3px solid var(--gold);padding-left:10px;font-weight:700;color:var(--gold)}.major-badge{display:inline-block;margin-left:8px;padding:1px 6px;border:1px solid currentColor;border-radius:4px;font-size:10px;letter-spacing:.08em;vertical-align:middle}.placing{display:inline-block;padding:2px 9px;border-radius:5px;font-weight:700}.placing-gold{color:#ffe082;background:#695015}.placing-silver{color:#eef2f7;background:#505b6b}.placing-bronze{color:#ffd0a6;background:#714526}.map-child{background:var(--panel)}.map-child td:first-child{padding-left:30px}.map-child[hidden]{display:none}
+</style>
+</head>
+<body>
+<main>
+<header><div><h1><span>ZywOo</span> / history</h1><div id="metadata" class="muted">Loading map history…</div></div><div style="display:flex;align-items:center;gap:16px"><button id="theme-toggle" type="button" aria-pressed="false">Light mode</button></div></header>
+<div id="load-error" class="notice hidden"></div>
+<div class="cards" id="stats"></div>
+<nav class="tabs" aria-label="View level"><button data-view="map" aria-pressed="true">Map-level</button><button data-view="match" aria-pressed="false">Match-level</button><button data-view="tournament" aria-pressed="false">Tournament-level</button></nav>
+<div class="controls">
+<label style="flex:1">Search<input id="search" type="search" placeholder="Opponent, team, map, tournament…"></label>
+<label>Year<select id="year"><option value="">All years</option></select></label>
+<label>Map<select id="map"><option value="">All maps</option></select></label>
+<label>Award / placing<select id="award-filter"><option value="">All results</option><option value="mvp">MVP</option><option value="lan-win">LANs won (HLTV)</option><option value="1st">1st</option><option value="2nd">2nd</option><option value="3rd">3rd</option><option value="3-4th">3–4th</option><option value="4th">4th</option></select></label>
+<label>Order<select id="sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="rating">Highest rating</option><option value="kills">Most kills</option></select></label>
+<button id="reset" style="align-self:end">Reset</button>
+</div>
+<div id="note" class="notice"></div>
+<div class="table-wrap"><table><thead id="head"></thead><tbody id="rows"></tbody></table></div>
+<div class="pager"><span id="count" class="muted" aria-live="polite"></span></div>
+<footer>Ratings are arithmetic averages of available map ratings, not HLTV series/event ratings. Missing ratings display as — and are excluded from averages. Filters apply to maps before aggregation; grouped totals reflect only matching maps. YouTube links are title-matched; playback and full-map coverage are unverified. <a href="./data/zywoo-esl-pro-league-season-24-povs.md">POV search evidence</a>.<br><a href="webcal://raw.githubusercontent.com/doehyunbaek/vitality-cal/ics/Vitality.ics">Subscribe to Vitality’s calendar</a></footer>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+function setTheme(theme){document.documentElement.dataset.theme=theme;$('theme-toggle').textContent=theme==='light'?'Dark mode':'Light mode';$('theme-toggle').setAttribute('aria-pressed',String(theme==='light'));}
+let savedTheme;try{savedTheme=localStorage.getItem('zywoo-theme');}catch{}
+setTheme(savedTheme==='light'?'light':'dark');
+$('theme-toggle').onclick=()=>{const theme=document.documentElement.dataset.theme==='light'?'dark':'light';setTheme(theme);try{localStorage.setItem('zywoo-theme',theme);}catch{}};
+const mapNames = {d2:'Dust2',mrg:'Mirage',inf:'Inferno',nuke:'Nuke',anb:'Anubis',anc:'Ancient',cch:'Cache',ovp:'Overpass',trn:'Train',vtg:'Vertigo',cbl:'Cobblestone'};
+const esc = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let data=null,view='map',items=[];
+try{const saved=localStorage.getItem('zywoo-view');if(['map','match','tournament'].includes(saved))view=saved;}catch{}
+document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));
+function tournament(m){return typeof m.tournament==='string' ? m.tournament : m.tournament?.name || m.event?.name || (typeof m.event==='string'?m.event:'');}
+function matchKey(m){return m.matchId != null ? 'id:'+m.matchId : JSON.stringify([m.date,m.team,m.opponent]);}
+function rating(value){return Number.isFinite(value)?value.toFixed(2):'—';}
+function averageRating(maps){const rated=maps.filter(m=>Number.isFinite(m.rating));return rated.length?rated.reduce((s,m)=>s+m.rating,0)/rated.length:null;}
+function aggregate(maps){return {maps,date:maps.reduce((d,m)=>m.date>d?m.date:d,''),start:maps.reduce((d,m)=>m.date<d?m.date:d,maps[0].date),kills:maps.reduce((s,m)=>s+m.kills,0),deaths:maps.reduce((s,m)=>s+m.deaths,0),rating:averageRating(maps),wins:maps.filter(m=>m.teamScore>m.opponentScore).length,losses:maps.filter(m=>m.teamScore<m.opponentScore).length};}
+function groups(maps,key){const g=new Map();for(const m of maps){const k=key(m);if(!g.has(k))g.set(k,[]);g.get(k).push(m);}return [...g].map(([key,ms])=>({...aggregate(ms),key}));}
+function safeLink(m){try{const u=new URL(m.url);return u.protocol==='https:'&&u.hostname==='www.hltv.org'?u.href:null;}catch{return null;}}
+function mapLink(m){const name=esc(mapNames[m.map]||m.map),url=safeLink(m);return url?`<a href="${esc(url)}" target="_blank" rel="noopener">${name} ↗</a>`:name;}
+let povs={};
+function povLink(m){const pov=povs[m.mapStatsId];if(!pov||pov.type==='dual')return '<span class="muted">—</span>';if(pov.type==='not-found')return '<span class="muted">—</span>';if(!['solo','dual'].includes(pov.type)||!/^[\w-]{11}$/.test(pov.videoId))return '—';const dual=pov.type==='dual';const title=`${dual?'m0NESY / ZywOo dual POV':'ZywOo demo POV'} · Title-matched; playback and full-map coverage not verified.${pov.note?' '+pov.note:''}`;return `<a href="https://www.youtube.com/watch?v=${esc(pov.videoId)}" target="_blank" rel="noopener" title="${esc(title)}" aria-label="${esc(title+' '+m.opponent+' '+(mapNames[m.map]||m.map))}">${dual?'Dual POV':'ZywOo POV'} ↗</a>`;}
+function diff(k,d){const n=k-d;return `<span class="${n>=0?'positive':'negative'}">${n>0?'+':''}${n}</span>`;}
+function details(maps,index){return `<button type="button" data-expand="${index}" aria-expanded="false" aria-controls="map-rows-${index}">${maps.length} maps · expand</button>`;}
+function expandedRows(maps,index){const columns=9;const header=['Date','Opponent','W / L / D','Score','Map','K–D','+/−','Rating','YouTube POV'];return `<tr id="map-rows-${index}" data-child="${index}" hidden class="map-child"><td colspan="${columns}"><strong>Individual maps</strong></td></tr><tr data-child="${index}" hidden class="map-child">${header.map(h=>`<th scope="col">${h}</th>`).join('')}</tr>`+maps.map(m=>`<tr data-child="${index}" hidden class="map-child">${[esc(m.date),esc(m.opponent),m.teamScore>m.opponentScore?'<span class="positive">W</span>':m.teamScore<m.opponentScore?'<span class="negative">L</span>':'D',`${m.teamScore}–${m.opponentScore}`,mapLink(m),`${m.kills}–${m.deaths}`,diff(m.kills,m.deaths),rating(m.rating),povLink(m)].map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');}
+function tournamentLabel(map){const name=tournament(map)||'Unassigned tournament';const major=/\bmajor\b/i.test(name)&&!/\b(rmr|qualifier|minor|challengers stage|showmatch)\b/i.test(name);const label=major?`<span class="major-event">${esc(name)}<span class="major-badge">MAJOR</span></span>`:esc(name);return label;}
+function mvpBadge(map){const award=map.tournament?.mvp;return award?` <button type="button" class="mvp-badge" data-result-filter="mvp" title="Filter ZywOo MVP tournaments">★ MVP</button>`:'';}
+function placing(maps){const values=[...new Set(maps.map(m=>m.tournament?.placing).filter(v=>v!=null&&v!==''))];if(values.length!==1)return '—';const value=String(values[0]);const medal=value==='1st'?'gold':value==='2nd'?'silver':['3rd','3-4th','4th'].includes(value)?'bronze':null;return `<button type="button" class="placing${medal?' placing-'+medal:''}" data-result-filter="${esc(value)}" title="Filter ${esc(value)} placings">${esc(value)}</button>`;}
+function load(value){
+ if(!value||!Array.isArray(value.maps)||!value.maps.length)throw Error('JSON must contain a nonempty maps array.');
+ for(const m of value.maps){if(!/^\d{4}-\d{2}-\d{2}$/.test(m.date)||!['team','opponent','map'].every(k=>typeof m[k]==='string')||!['kills','deaths','teamScore','opponentScore'].every(k=>Number.isFinite(m[k])&&m[k]>=0)||(m.rating!==null&&(!Number.isFinite(m.rating)||m.rating<0)))throw Error('Invalid map record in JSON.');}
+ data=value;$('load-error').classList.add('hidden');
+ $('metadata').textContent=`${value.player||'ZywOo'} · ${value.maps.length.toLocaleString()} maps · retrieved ${value.retrievedAt ? new Date(value.retrievedAt).toLocaleString() : 'unknown'}`;
+ for(const [id,values,title] of [['year',[...new Set(value.maps.map(m=>m.date.slice(0,4)))].sort().reverse(),'All years'],['map',[...new Set(value.maps.map(m=>m.map))].sort(),'All maps']]){$(id).replaceChildren(new Option(title,''),...values.map(v=>new Option(id==='map'?mapNames[v]||v:v,v)));}
+ render();
+}
+function render(){if(!data)return;
+ const q=$('search').value.trim().toLowerCase();const maps=data.maps.filter(m=>(!$('award-filter').value||($('award-filter').value==='mvp'?!!m.tournament?.mvp:$('award-filter').value==='lan-win'?!!m.tournament?.lanWin:String(m.tournament?.placing)===$('award-filter').value))&&(!$('year').value||m.date.startsWith($('year').value))&&(!$('map').value||m.map===$('map').value)&&(!q||[m.team,m.opponent,m.map,mapNames[m.map],m.date,tournament(m)].join(' ').toLowerCase().includes(q)));
+ const total=maps.length?aggregate(maps):null;
+ $('stats').innerHTML=[['Maps',maps.length.toLocaleString()],['Kills / deaths',total?`${total.kills.toLocaleString()} / ${total.deaths.toLocaleString()}`:'—'],['Avg. map rating',total?rating(total.rating):'—'],['Map win rate',total?`${(total.wins/maps.length*100).toFixed(1)}%`:'—']].map(([label,v])=>`<div class="card"><strong>${v}</strong><span>${label}</span></div>`).join('')+`<button type="button" class="card" id="wins-card" aria-pressed="${$('award-filter').value==='lan-win'}" title="First-place events listed in HLTV’s LAN achievements"><strong>${new Set(maps.filter(m=>m.tournament?.lanWin).map(m=>m.tournament.id)).size}</strong><span>LANs won · filter</span></button><button type="button" class="card" id="mvp-card" aria-pressed="${$('award-filter').value==='mvp'}" title="Filter MVP tournaments"><strong>${new Set(maps.filter(m=>m.tournament?.mvp).map(m=>m.tournament.id)).size}</strong><span>★ MVP awards · filter</span></button>`;
+ items=view==='map'?maps:view==='match'?groups(maps,matchKey):groups(maps,m=>m.tournament?.id!=null?'event:'+m.tournament.id:tournament(m)||'Unassigned tournament');
+ const order=$('sort').value;items.sort((a,b)=>order==='rating'?(b.rating??-1)-(a.rating??-1):order==='kills'?b.kills-a.kills:order==='old'?a.date.localeCompare(b.date):b.date.localeCompare(a.date));
+ $('note').classList.toggle('hidden',view==='tournament');
+ $('note').textContent=view==='map'?'Individual map results. Click a map for HLTV statistics. YouTube POVs are title-matched, not playback-verified; dual POVs are excluded.':view==='match'?`${data.maps.filter(m=>m.matchId!=null).length} maps have corroborated match IDs. Remaining groups are inferred by date, team and opponent; rematches may merge and overnight series may split. Scores reflect filtered map wins/losses.`:`${data.maps.filter(m=>tournament(m)).length.toLocaleString()} of ${data.maps.length.toLocaleString()} maps have HLTV tournament evidence.${data.maps.some(m=>!tournament(m))?' Maps without evidence remain unassigned.':''} Totals reflect ZywOo’s recorded maps and your filters.`;
+ const headers=view==='map'?['Date','Team','Opponent','Score','Map','K–D','+/−','Rating','YouTube POV']:view==='match'?['Date','Team','Opponent','Maps W–L','K–D','+/−','Avg. rating','Maps']:['Tournament','Date range','Placing','Matches','Maps W–L','K–D','+/−','Avg. rating'];
+ $('head').innerHTML='<tr>'+headers.map(h=>`<th scope="col">${h}</th>`).join('')+'</tr>';
+ $('rows').innerHTML=items.map((m,index)=>{let cells;
+ if(view==='map')cells=[esc(m.date),esc(m.team),esc(m.opponent),`${m.teamScore}–${m.opponentScore}`,mapLink(m),`${m.kills}–${m.deaths}`,diff(m.kills,m.deaths),rating(m.rating),povLink(m)];
+ else if(view==='match')cells=[esc(m.date),esc(m.maps[0].team),esc(m.maps[0].opponent),`${m.wins}–${m.losses}`,`${m.kills}–${m.deaths}`,diff(m.kills,m.deaths),rating(m.rating),details(m.maps,index)];
+ else cells=[`<button type="button" class="tournament-expand" data-expand="${index}" aria-expanded="false" aria-controls="map-rows-${index}">${tournamentLabel(m.maps[0])}</button>`,`${esc(m.start)} → ${esc(m.date)}`,placing(m.maps)+mvpBadge(m.maps[0]),new Set(m.maps.map(matchKey)).size,`${m.wins}–${m.losses}`,`${m.kills}–${m.deaths}`,diff(m.kills,m.deaths),rating(m.rating)];
+ return '<tr>'+cells.map(c=>`<td>${c}</td>`).join('')+'</tr>'+(view==='map'?'':expandedRows(m.maps,index));}).join('')||`<tr><td colspan="${headers.length}">No results match your filters.</td></tr>`;
+ $('count').textContent=`${items.length.toLocaleString()} ${view==='map'?'maps':view==='match'?'match groups':'tournament groups'}${view==='tournament'?' · Match counts include inferred groups.':''}`;
+}
+$('stats').addEventListener('click',e=>{const card=e.target.closest('#mvp-card,#wins-card');if(!card)return;$('award-filter').value=card.id==='wins-card'?'lan-win':'mvp';view='tournament';try{localStorage.setItem('zywoo-view',view);}catch{}document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===view)));render();});
+$('rows').addEventListener('click',e=>{const filter=e.target.closest('[data-result-filter]');if(filter){const value=filter.dataset.resultFilter;if(![...$('award-filter').options].some(o=>o.value===value))$('award-filter').add(new Option(value,value));$('award-filter').value=value;render();return;}const button=e.target.closest('button[data-expand]');if(!button)return;const index=button.dataset.expand;const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));if(!button.classList.contains('tournament-expand'))button.textContent=`${items[Number(index)].maps.length} maps · ${open?'collapse':'expand'}`;for(const row of $('rows').querySelectorAll(`[data-child="${index}"]`))row.hidden=!open;});
+for(const b of document.querySelectorAll('[data-view]'))b.addEventListener('click',()=>{view=b.dataset.view;try{localStorage.setItem('zywoo-view',view);}catch{}document.querySelectorAll('[data-view]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();});
+for(const id of ['search','year','map','sort','award-filter'])$(id).addEventListener(id==='search'?'input':'change',()=>{render();});
+function resetFilters(){$('search').value='';$('year').value='';$('map').value='';$('award-filter').value='';$('sort').value='new';render();}
+$('reset').onclick=resetFilters;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();resetFilters();}});
+function error(e){$('load-error').textContent=`${e.message} Serve this folder over HTTP to load data/zywoo-history.json.`;$('load-error').classList.remove('hidden');if(!data)$('metadata').textContent='No data loaded';}
+async function fetchJSON(path){const r=await fetch(path);if(!r.ok)throw Error(`Data request failed (${r.status}): ${path}`);return r.json();}
+fetchJSON('./data/zywoo-history.json').then(history=>{
+ const {tournaments:events,matches:series,placements,mvps,lanWins}=history.evidence||{};
+ const byMap=new Map(history.maps.map(m=>[m.mapStatsId,m]));
+ for(const record of events?.maps||[]){const m=byMap.get(record.mapStatsId);if(m)m.tournament=record.tournament;}
+ for(const match of series?.matches||[]){if(match.evidence?.status!=='map-ids-corroborated')continue;for(const id of match.mapStatsIds){const m=byMap.get(id);if(m){m.matchId=match.matchId;m.matchUrl=match.matchUrl;m.tournament=match.tournament;m.bestOf=match.bestOf;}}}
+ const byEvent=new Map((placements?.placements||[]).filter(p=>p.placing!=='-').map(p=>[JSON.stringify([p.tournamentId,p.team]),p]));
+ for(const m of history.maps){const p=byEvent.get(JSON.stringify([m.tournament?.id,m.team]));if(p)m.tournament={...m.tournament,placing:p.placing,placementEvidence:p.evidence};}
+ const awards=new Map((mvps?.awards||[]).filter(a=>a.playerId===11893&&a.tournamentId!=null).map(a=>[a.tournamentId,a]));
+ for(const m of history.maps){const award=awards.get(m.tournament?.id);if(award)m.tournament={...m.tournament,mvp:award};}
+ const wins=new Map((lanWins?.wins||[]).map(w=>[w.tournamentId,w]));
+ for(const m of history.maps){const win=wins.get(m.tournament?.id);if(win)m.tournament={...m.tournament,lanWin:win};}
+ fetchJSON('./data/zywoo-povs.json').then(videos=>{povs=videos.maps||{};load(history);}).catch(e=>{load(history);$('load-error').textContent=`POV links unavailable: ${e.message}`;$('load-error').classList.remove('hidden');});
+}).catch(error);
+</script>
+</body>
+</html>

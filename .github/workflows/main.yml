@@ -1,0 +1,58 @@
+name: Update Vitality calendar
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vitality-calendar
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out current generator
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - name: Generate calendar
+        env:
+          PANDASCORE_TOKEN: ${{ secrets.PANDASCORE_TOKEN }}
+          CALENDAR_OUTPUT: ${{ runner.temp }}/Vitality.ics
+        run: npm start
+      - name: Check out published feed
+        uses: actions/checkout@v4
+        with:
+          ref: ics
+          path: published
+      - name: Publish only changed calendar
+        run: |
+          cp "$RUNNER_TEMP/Vitality.ics" published/Vitality.ics
+          cd published
+          git config user.name "Vitality Calendar"
+          git config user.email "vitalitycal25@gmail.com"
+          git add Vitality.ics
+          if git diff --cached --quiet; then
+            echo "Calendar is unchanged."
+            exit 0
+          fi
+          git commit -m "Update Vitality.ics"
+          git push origin HEAD:ics
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "::error::Calendar update failed. The published feed has not been replaced. Check PandaScore credentials and match coverage."
+          echo "Calendar update failed; the previous feed is preserved. Enable GitHub Actions failure notifications for this repository." >> "$GITHUB_STEP_SUMMARY"

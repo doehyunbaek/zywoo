@@ -1,0 +1,28 @@
+{
+  "source": "YouTube search-result titles; playback and full-map coverage not verified",
+  "searchedAt": "2026-10-21",
+  "note": "Multiple tournaments; links matched by player, opponent, map, event and available K–D." ,
+  "maps": {
+    "238877": { "videoId": "JZpYssplSeE", "type": "solo", "title": "ZywOo (18-12) AURORA vs VITALITY (Cache) | StarLadder StarSeries Fall 2026" },
+    "238853": { "videoId": "xhty5pvsYTQ", "type": "solo", "title": "ZywOo (20-5) | Vitality vs FURIA | cache | Rating 2.24 | StarLadder StarSeries Fall 2026", "note": "Video title rating 2.24 differs from dataset rating 2.31; opponent, map, event and K–D match." },
+    "237043": { "videoId": "bf6UyorTnks", "type": "solo", "title": "ZywOo (21-13) vs FURIA | Cache POV | BLAST Open Porto 2026" },
+    "236058": { "type": "not-found" },
+    "235540": { "videoId": "d4udsKMCPXY", "type": "solo", "title": "ZywOo (25-10) FAZE vs VITALITY (Cache) | Esports World Cup 2026" },
+    "240578": { "videoId": "vYgtWY-q6WI", "type": "solo" },
+    "240586": { "videoId": "RasmeZwsGYU", "type": "solo" },
+    "240712": { "videoId": "zvq7dUnZ6Mo", "type": "solo" },
+    "240721": { "videoId": "1jY_ROlqGSA", "type": "solo" },
+    "240732": { "videoId": "vijJ1-lc7cI", "type": "solo" },
+    "240780": { "videoId": "XtJRJW_M89E", "type": "dual" },
+    "240785": { "videoId": "KAIlYwWjboI", "type": "dual" },
+    "240790": { "videoId": "EOWl3qkiH5Y", "type": "dual" },
+    "241180": { "type": "not-found" },
+    "241184": { "videoId": "s3BhcA15v4Y", "type": "solo" },
+    "241326": { "videoId": "MhhDVazysY4", "type": "solo" },
+    "241339": { "videoId": "BQ5r-v5ggJo", "type": "solo" },
+    "241350": { "videoId": "-sERG2HtuAw", "type": "solo", "note": "Other uploads report 18–10 instead of the dataset’s 18–9." },
+    "241448": { "videoId": "8dsMauAvpAw", "type": "solo" },
+    "241452": { "videoId": "_9d8pLVl82M", "type": "solo" },
+    "241462": { "videoId": "aZovVhrxqiM", "type": "solo" }
+  }
+}
