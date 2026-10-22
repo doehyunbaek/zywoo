@@ -3,10 +3,12 @@
 An automatically refreshed calendar of Team Vitality's Counter-Strike matches,
 using PandaScore's supported API rather than scraping bot-protected websites.
 
-Subscribe to the existing feed (the URL does not change):
+Match history: https://doehyunbaek.github.io/zywoo/
+
+Subscribe to this repository's calendar feed:
 
 ```text
-webcal://raw.githubusercontent.com/doehyunbaek/vitality-cal/ics/Vitality.ics
+webcal://raw.githubusercontent.com/doehyunbaek/zywoo/ics/Vitality.ics
 ```
 
 ## Setup
