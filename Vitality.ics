@@ -923,6 +923,15 @@ DESCRIPTION:PGL Masters\nGroup Stage\nStatus: finished\nVitality: 2\; 9z: 0
 DURATION:PT3H
 END:VEVENT
 BEGIN:VEVENT
+UID:pandascore-match-1753698@vitality-cal
+SUMMARY:Vitality vs. TheMongolz
+DTSTAMP:20261024T200114Z
+LAST-MODIFIED:20261024T200114Z
+DTSTART:20261025T110000Z
+DESCRIPTION:PGL Masters\nGroup Stage\nStatus: not_started
+DURATION:PT3H
+END:VEVENT
+BEGIN:VEVENT
 UID:pandascore-match-1762451@vitality-cal
 SUMMARY:Vitality vs. Team Falcons
 DTSTAMP:20261021T081227Z
