@@ -924,6 +924,15 @@ DESCRIPTION:PGL Masters\nGroup Stage\nStatus: finished\nVitality: 1\; FUT E
 DURATION:PT3H
 END:VEVENT
 BEGIN:VEVENT
+UID:pandascore-match-1753717@vitality-cal
+SUMMARY:Vitality vs. Natus Vincere
+DTSTAMP:20261026T200526Z
+LAST-MODIFIED:20261026T200526Z
+DTSTART:20261027T170000Z
+DESCRIPTION:PGL Masters\nGroup Stage\nStatus: not_started
+DURATION:PT3H
+END:VEVENT
+BEGIN:VEVENT
 UID:pandascore-match-1762451@vitality-cal
 SUMMARY:Vitality vs. Team Falcons
 DTSTAMP:20261026T141919Z
