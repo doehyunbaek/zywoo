@@ -1,10 +1,17 @@
 {
   "player": "ZywOo",
   "source": "https://www.hltv.org/stats/players/matches/11893/zywoo",
-  "retrievedAt": "2026-10-31T13:48:19.791Z",
-  "expectedMaps": 1743,
+  "retrievedAt": "2026-11-13T17:26:51.000Z",
+  "expectedMaps": 1750,
   "complete": true,
   "maps": [
+    {"date":"2026-11-13","team":"Vitality","teamScore":14,"opponent":"MOUZ","opponentScore":16,"map":"cch","kills":22,"deaths":20,"differential":2,"rating":1.02,"mapStatsId":244234,"url":"https://www.hltv.org/stats/matches/mapstatsid/244234/mouz-vs-vitality?event=8251&contextIds=11893&contextTypes=player"},
+    {"date":"2026-11-13","team":"Vitality","teamScore":8,"opponent":"MOUZ","opponentScore":13,"map":"mrg","kills":11,"deaths":18,"differential":-7,"rating":0.66,"mapStatsId":244230,"url":"https://www.hltv.org/stats/matches/mapstatsid/244230/vitality-vs-mouz?event=8251&contextIds=11893&contextTypes=player"},
+    {"date":"2026-11-12","team":"Vitality","teamScore":0,"opponent":"FURIA","opponentScore":13,"map":"mrg","kills":2,"deaths":13,"differential":-11,"rating":0.33,"mapStatsId":244125,"url":"https://www.hltv.org/stats/matches/mapstatsid/244125/furia-vs-vitality?event=8251&contextIds=11893&contextTypes=player"},
+    {"date":"2026-11-12","team":"Vitality","teamScore":10,"opponent":"FURIA","opponentScore":13,"map":"d2","kills":9,"deaths":12,"differential":-3,"rating":0.68,"mapStatsId":244124,"url":"https://www.hltv.org/stats/matches/mapstatsid/244124/furia-vs-vitality?event=8251&contextIds=11893&contextTypes=player"},
+    {"date":"2026-11-12","team":"Vitality","teamScore":13,"opponent":"FURIA","opponentScore":5,"map":"inf","kills":12,"deaths":9,"differential":3,"rating":1.15,"mapStatsId":244123,"url":"https://www.hltv.org/stats/matches/mapstatsid/244123/vitality-vs-furia?event=8251&contextIds=11893&contextTypes=player"},
+    {"date":"2026-11-11","team":"Vitality","teamScore":13,"opponent":"Falcons","opponentScore":10,"map":"d2","kills":20,"deaths":10,"differential":10,"rating":1.36,"mapStatsId":244070,"url":"https://www.hltv.org/stats/matches/mapstatsid/244070/falcons-vs-vitality?event=8251&contextIds=11893&contextTypes=player"},
+    {"date":"2026-11-11","team":"Vitality","teamScore":13,"opponent":"Falcons","opponentScore":10,"map":"anb","kills":16,"deaths":17,"differential":-1,"rating":1.13,"mapStatsId":244069,"url":"https://www.hltv.org/stats/matches/mapstatsid/244069/vitality-vs-falcons?event=8251&contextIds=11893&contextTypes=player"},
     {
       "date": "2026-10-31",
       "team": "Vitality",
@@ -24415,6 +24422,13 @@
       "method": "Exact mapStatsId join from team map-history rows",
       "sourceRows": 1502,
       "maps": [
+        {"mapStatsId":244234,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"mapUrl":"https://www.hltv.org/stats/matches/mapstatsid/244234/mouz-vs-vitality?event=8251&contextIds=11893&contextTypes=player","sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
+        {"mapStatsId":244230,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
+        {"mapStatsId":244125,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
+        {"mapStatsId":244124,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
+        {"mapStatsId":244123,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
+        {"mapStatsId":244070,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
+        {"mapStatsId":244069,"tournament":{"id":8251,"name":"BLAST Rivals 2026 Season 2","statsUrl":"https://www.hltv.org/stats/players/11893/zywoo?event=8251"},"sourceUrl":"https://www.hltv.org/stats/players/matches/11893/zywoo?event=8251","retrievedAt":"2026-11-13T17:26:51.000Z"},
         {
           "mapStatsId": 241462,
           "tournament": {
@@ -41314,6 +41328,36 @@
       "source": "HLTV map stats and match pages",
       "matches": [
         {
+          "matchId": 2400204,
+          "matchUrl": "https://www.hltv.org/matches/2400204/vitality-vs-mouz-blast-rivals-2026-season-2",
+          "tournament": {"id":8251,"name":"BLAST Rivals 2026 Season 2","url":"https://www.hltv.org/events/8251/blast-rivals-2026-season-2"},
+          "bestOf": 3,
+          "teams": [{"name":"Vitality","score":"0"},{"name":"MOUZ","score":"2"}],
+          "mapStatsIds": [244234,244230],
+          "complete": true,
+          "evidence": {"mapUrl":"https://www.hltv.org/stats/matches/mapstatsid/244234/match","matchUrl":"https://www.hltv.org/matches/2400204/vitality-vs-mouz-blast-rivals-2026-season-2","retrievedAt":"2026-11-13T17:29:45.992Z","status":"map-ids-corroborated"}
+        },
+        {
+          "matchId": 2400201,
+          "matchUrl": "https://www.hltv.org/matches/2400201/furia-vs-vitality-blast-rivals-2026-season-2",
+          "tournament": {"id":8251,"name":"BLAST Rivals 2026 Season 2","url":"https://www.hltv.org/events/8251/blast-rivals-2026-season-2"},
+          "bestOf": 3,
+          "teams": [{"name":"FURIA","score":"2"},{"name":"Vitality","score":"1"}],
+          "mapStatsIds": [244125,244123,244124],
+          "complete": true,
+          "evidence": {"mapUrl":"https://www.hltv.org/stats/matches/mapstatsid/244125/match","matchUrl":"https://www.hltv.org/matches/2400201/furia-vs-vitality-blast-rivals-2026-season-2","retrievedAt":"2026-11-13T17:29:54.574Z","status":"map-ids-corroborated"}
+        },
+        {
+          "matchId": 2399852,
+          "matchUrl": "https://www.hltv.org/matches/2399852/vitality-vs-falcons-blast-rivals-2026-season-2",
+          "tournament": {"id":8251,"name":"BLAST Rivals 2026 Season 2","url":"https://www.hltv.org/events/8251/blast-rivals-2026-season-2"},
+          "bestOf": 3,
+          "teams": [{"name":"Vitality","score":"2"},{"name":"Falcons","score":"0"}],
+          "mapStatsIds": [244070,244069],
+          "complete": true,
+          "evidence": {"mapUrl":"https://www.hltv.org/stats/matches/mapstatsid/244070/match","matchUrl":"https://www.hltv.org/matches/2399852/vitality-vs-falcons-blast-rivals-2026-season-2","retrievedAt":"2026-11-13T17:30:03.141Z","status":"map-ids-corroborated"}
+        },
+        {
           "matchId": 2398757,
           "matchUrl": "https://www.hltv.org/matches/2398757/vitality-vs-mouz-esl-pro-league-season-24",
           "tournament": {
@@ -41790,9 +41834,10 @@
     },
     "placements": {
       "source": "https://www.hltv.org/stats/teams/events/9565/vitality",
-      "retrievedAt": "2026-10-31T13:49:13.996Z",
+      "retrievedAt": "2026-11-13T17:26:51.000Z",
       "teamId": 9565,
       "placements": [
+        {"tournamentId":8251,"tournamentName":"BLAST Rivals 2026 Season 2","teamId":9565,"team":"Vitality","placing":"5-6th","evidence":{"sourceUrl":"https://www.hltv.org/events/8251/event","observedText":"Vitality 5-6th $25,000 + Club share: $60,000","retrievedAt":"2026-11-13T17:26:51.000Z","method":"Explicit Vitality placing in HLTV event prize distribution"}},
         {
           "tournamentId": 1040,
           "tournamentName": "Showmatch CS",
